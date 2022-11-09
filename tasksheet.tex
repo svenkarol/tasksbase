@@ -1,0 +1,42 @@
+\input{tasks.tex}
+
+\usepackage{lipsum}
+
+\begin{document}
+ 
+\taskstitle{1}{WS 2022/2023}{Grundlagen der Programmierung}{10. Oktober 2022}
+
+\task{Foo Bar!}
+%
+\subtask{}
+\lipsum[1][1-4]
+
+\subtask{}
+\lipsum[2][2-3]
+\begin{minted}[linenos,xleftmargin=20pt]{c}
+#include <stdio.h>
+
+/**
+ * Dieses Programm gibt einen Foo an die Bar aus.
+ */
+int main(void)
+{
+    printf("Foo Bar!\n");
+    return 0;
+}
+\end{minted}
+ 
+\subtask{}
+\lipsum[2][4]
+%
+\subtask{}
+\lipsum[3][1-5]
+%
+\begin{minted}{powershell}
+    cgg -BerlinWall -std=c42 .\foo_bar.zeh -o foo_bar 
+\end{minted}
+%
+\lipsum[3][6]
+
+\end{document} 
+ 

@@ -1,0 +1,108 @@
+\documentclass[fontsize=11pt, parskip=half]{scrartcl}
+
+\usepackage[ngerman]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage{minted}
+\usepackage{etoolbox,xpatch}
+\usepackage{attachfile}
+\usepackage{eurosym}
+\usepackage{url}
+\usepackage{mathtools}
+\usepackage{amssymb}
+
+\setlength{\parindent}{0em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% disable line-number copying %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% from http://tex.stackexchange.com/questions/57151/how-do-i-prevent-conflicts-between-accsupp-and-hyperref
+\usepackage{accsupp}
+\newcommand\emptyaccsupp[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+
+%default definition is: \def\theFancyVerbLine{\rmfamily\tiny\arabic{FancyVerbLine}}
+\let\theHFancyVerbLine\theFancyVerbLine% don't apply our patch to hyperref's version
+\def\theFancyVerbLine{\rmfamily\tiny\emptyaccsupp{\arabic{FancyVerbLine}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%% disable line-number copying end %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% disable minted error boxes %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%from https://tex.stackexchange.com/questions/343494/minted-red-box-around-greek-characters
+\makeatletter
+\AtBeginEnvironment{minted}{\dontdofcolorbox}
+\def\dontdofcolorbox{\renewcommand\fcolorbox[4][]{##4}}
+\xpatchcmd{\inputminted}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{}
+\xpatchcmd{\mintinline}{\minted@fvset}{\minted@fvset\dontdofcolorbox}{}{} % see https://tex.stackexchange.com/a/401250/
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% disable minted error boxes end %%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\mytitle}[1]{{\noindent\Large\textbf{#1}}}
+\newcommand{\mysubsection}[2]{\romannumeral #1) #2}
+\DeclareSectionCommand[
+    afterskip=1.5ex plus .2ex,
+    beforeskip=-3.25ex plus -1ex minus -.2ex,
+    indent=0pt,
+    level=2,
+    font=\usekomafont{section},
+    tocindent=1.5em,
+    tocnumwidth=2.3em,
+    counterwithin=section,
+style=section]{task}
+
+\DeclareSectionCommand[
+    afterskip=0sp,    
+    %afterskip=1.5ex plus .2ex,
+    %beforeskip=-3.25ex plus -1ex minus -.2ex,
+    beforeskip=0sp,
+    indent=0pt,
+    level=1,
+    font=\usekomafont{subsection},
+    tocindent=1.5em,
+    tocnumwidth=2.3em,
+    counterwithin=task,
+style=section]{subtask}
+
+\renewcommand{\thesubtask}{\roman{subtask}}
+\renewcommand{\thetask}{\thesection-\arabic{task}}
+\renewcommand*{\taskformat}{Aufgabe~\thetask:~}
+\renewcommand*{\subtaskformat}{\thesubtask)~}
+\setkomafont{subtask}{\normalfont\normalsize}
+\setkomafont{section}{\normalfont\bfseries\Large}
+
+\newcommand{\mintedattached}[2]{
+
+    \begin{minipage}{.91\textwidth}%
+        \inputminted{#1}{#2}%  
+    \end{minipage}%
+    \begin{minipage}{.06\textwidth}%
+        \attachfile[icon=Tag]{#2}%
+    \end{minipage}%        
+}
+\newcommand{\mintedattachedlines}[3][]{
+    
+    \begin{minipage}{.90\textwidth}%
+        \inputminted[#1,linenos,xleftmargin=20pt]{#2}{#3}%  
+    \end{minipage}%
+    \begin{minipage}{.10\textwidth}%
+        \raggedleft%
+        \attachfile[icon=Tag]{#3}%
+    \end{minipage}%
+}
+
+\newcommand{\mintedattachedlinessmall}[2]{
+    
+    \begin{minipage}{.90\textwidth}%
+        \inputminted[linenos,fontsize=\small,xleftmargin=20pt]{#1}{#2}%  
+    \end{minipage}%
+    \begin{minipage}{.10\textwidth}%
+        \raggedleft%
+        \attachfile[icon=Tag]{#2}%
+    \end{minipage}%
+}
+
+\newcommand{\taskstitle}[4]{
+    \setcounter{section}{#1}
+
+    {\noindent\textbf{#3}} \hfill {\textbf{Hochschule Merseburg}}\\
+    \noindent {#2} \hfill Prof. Dr. Sven Karol\\
+    
+    \mytitle{Übungsblatt {#1} \hfill {#4}}\\
+}
