@@ -1,4 +1,4 @@
-# tasksbase
+# Template for Task descriptions and assignments
 
 My basic tex files for creating task sheets.
 
