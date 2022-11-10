@@ -105,11 +105,13 @@ style=section]{subtask}
     \end{minipage}%
 }
 
-\newcommand{\taskstitle}[4]{
-    \setcounter{section}{#1}
+\newcommand{\taskstitle}[5][]{
+    \setcounter{section}{#2}
 
-    {\noindent\textbf{#3}} \hfill {\textbf{\school}}\\
-    \noindent {#2} \hfill \instructor\\
+    {\noindent\textbf{#4}} \hfill {\textbf{\school}}\\
+    \noindent {#3} \hfill \instructor\\
     
-    \mytitle{\sheetheading~{#1} \hfill {#4}}\\
+    \ifthenelse { \equal {#1} {} } 
+    { \mytitle{\sheetheading~{#2} \hfill {#5}}\\}
+    { \mytitle{\sheetheading~{#2}--{#1} \hfill {#5}}\\}   
 }
