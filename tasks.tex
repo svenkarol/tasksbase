@@ -11,6 +11,7 @@
 \usepackage{url}
 \usepackage{mathtools}
 \usepackage{amssymb}
+\usepackage{xspace}
 
 \setlength{\parindent}{0em}
 
@@ -62,8 +63,14 @@ style=section]{subtask}
 
 \renewcommand{\thesubtask}{\roman{subtask}}
 \renewcommand{\thetask}{\thesection-\arabic{task}}
-\renewcommand*{\taskformat}{Aufgabe~\thetask:~}
+\renewcommand*{\taskformat}{\taskheading~\thetask:~}
 \renewcommand*{\subtaskformat}{\thesubtask)~}
+
+\newcommand{\instructor}{Prof. Dr. Sven Karol\xspace}
+\newcommand{\school}{Hochschule Merseburg\xspace}
+\newcommand{\sheetheading}{Übungsblatt\xspace}
+\newcommand{\taskheading}{Aufgabe\xspace}
+
 \setkomafont{subtask}{\normalfont\normalsize}
 \setkomafont{section}{\normalfont\bfseries\Large}
 
@@ -101,8 +108,8 @@ style=section]{subtask}
 \newcommand{\taskstitle}[4]{
     \setcounter{section}{#1}
 
-    {\noindent\textbf{#3}} \hfill {\textbf{Hochschule Merseburg}}\\
-    \noindent {#2} \hfill Prof. Dr. Sven Karol\\
+    {\noindent\textbf{#3}} \hfill {\textbf{\school}}\\
+    \noindent {#2} \hfill \instructor\\
     
-    \mytitle{Übungsblatt {#1} \hfill {#4}}\\
+    \mytitle{\sheetheading~{#1} \hfill {#4}}\\
 }
