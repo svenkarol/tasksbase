@@ -28,7 +28,7 @@ jobs:
         with:
           name: task-sheets
           path: |
-            */*.pdf
+            *.pdf
   
   release:
     runs-on: ubuntu-latest
