@@ -74,15 +74,16 @@ style=section]{subtask}
 \setkomafont{subtask}{\normalfont\normalsize}
 \setkomafont{section}{\normalfont\bfseries\Large}
 
-\newcommand{\mintedattached}[2]{
+\newcommand{\mintedattached}[3][]{
 
     \begin{minipage}{.91\textwidth}%
-        \inputminted{#1}{#2}%  
+        \inputminted[#1]{#2}{#3}%  
     \end{minipage}%
     \begin{minipage}{.06\textwidth}%
-        \attachfile[icon=Tag]{#2}%
+        \attachfile[icon=Tag]{#3}%
     \end{minipage}%        
 }
+
 \newcommand{\mintedattachedlines}[3][]{
     
     \begin{minipage}{.90\textwidth}%
